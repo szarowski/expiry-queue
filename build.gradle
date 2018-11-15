@@ -1,0 +1,55 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.0.RELEASE'
+    id 'com.github.ben-manes.versions' version '0.20.0'
+}
+
+repositories {
+    jcenter()
+    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+project.sourceCompatibility = JavaVersion.VERSION_1_8
+project.targetCompatibility = JavaVersion.VERSION_1_8
+
+compileJava {
+    options.compilerArgs << '-parameters'
+}
+
+jar {
+    enabled = true
+    baseName = 'expiry-queue'
+    manifest {
+        attributes 'Start-Class': 'com.expiryqueue.ExpiryQueueApp'
+    }
+}
+
+repositories {
+    jcenter()
+    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-dependencies:2.1.0.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.hazelcast:hazelcast:3.11'
+    implementation 'com.hazelcast:hazelcast-spring:3.11'
+
+    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'com.google.guava:guava:27.0-jre'
+    implementation 'org.flywaydb:flyway-core:5.2.1'
+    implementation 'org.postgresql:postgresql:42.2.5'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2'
+    testImplementation 'be.joengenduvel.java.verifiers:to-string:1.0.2'
+    testImplementation 'com.github.tomakehurst:wiremock:2.19.0'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.0.2'
+    testImplementation 'org.assertj:assertj-core:3.11.1'
+}

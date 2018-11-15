@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: expiry-queue
+  main:
+    allowBeanDefinitionOverriding: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/expiry_queue
+    username: expiry_queue
+    password: expiry_queue
+  h2:
+    console:
+      enabled: true
+
+flyway:
+  table: schema_version
